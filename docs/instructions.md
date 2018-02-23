@@ -385,7 +385,7 @@ character at the same time) for VSCode's integrated terminal):
 $ ./compile
 ```
 
-You will notice that after you run this script it will create a obj
+You will notice that after you run this script it will create a `obj`
 directory as well as a `huffman_submit.zip` file. The later is the zip
 archive file you should submit to Gradescope. In addition, this will
 produce 4 executable files:
