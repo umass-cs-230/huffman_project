@@ -1,14 +1,18 @@
-# Overview
+# COMPSCI 230 Computer Systems Principles
+# Huffman Coding
+
+[starter code]: https://github.com/umass-cs-230/project-huffman-s18/archive/master.zip
+
+## Overview
 
 This project assignment will exercise your understanding of bit-level
 manipulation in C, allocations and manipulation of array and
 pointer-linked data structures in C, and working with larger C
-programs.  You must complete all the exercises below using a text
-editor of your choice.  Make sure you follow the instructions
-carefully.  The actual code you write is fairly short.  However, the
-details are quite precise.  Programming errors often result from
-slight differences that are hard to detect -- so be careful and
-understand exactly what the exercises are asking you to do.
+programs. Make sure you follow the instructions carefully.  The actual
+code you write is fairly short.  However, the details are quite
+precise.  Programming errors often result from slight differences that
+are hard to detect -- so be careful and understand exactly what the
+exercises are asking you to do.
 
 The goal of this project is to complete the implementation of two
 programs using the [Huffman coding algorithm][huffman] for file
@@ -69,13 +73,13 @@ In this project you will complete the implementation of these two
 programs to compress and decompress ASCII text files using Huffman
 coding.
 
-# Suggested Reading
+## Suggested Reading
 
 Although the goal of this assignment is not really to learn about
 Huffman coding in particular, you will need to read up on how it works
-in order to understand the provided starter code and how to implement
-the parts indicated below.  A good starting point is the description
-of [Huffman coding][huffman] on Wikipedia.
+in order to understand the provided [starter code] and how to
+implement the parts indicated below.  A good starting point is the
+description of [Huffman coding][huffman] on Wikipedia.
 
 You should also watch the [video][overview-video] that we provide that
 covers the Huffman algorithm and highlights the important files in the
@@ -87,25 +91,60 @@ coding works, and how the implementation is constructed, so that you
 will be successful.  Each reading will provide deeper understanding as
 you come to grasp all the parts and how they work together.
 
-# Part 0: Project Startup
+## Part 0: Project Startup
 
-Download and extract the contents of the starter code into your
-Workspace folder. To do this, download the starter code and place the
-zip archive file in your Workspace folder (see the first assignment
-documentation if you forget where this is). After you place the zip
-file in the Workspace folder, right-click on the zip archive file and
-select "Extract Here". This will extract the contents of the zip file
-and you should see a directory named `huffman_project`. You can then
+Download and extract the contents of the [starter code] into your
+Workspace folder. To do this, download the [starter code] and place
+the zip archive file in your Workspace folder (see the first
+assignment documentation if you forget where this is). After you place
+the zip file in the Workspace folder, right-click on the zip archive
+file and select "Extract Here". This will extract the contents of the
+zip file and you will see a directory for this project. You can then
 delete the zip archive file that you downloaded.
 
-# Part 1: Understand The Code
+## Part 1: Understand The Code
 
 The code tree is organized as follows, under the main project
 directory:
 
-ADD IMAGE
+```
+.
+|-- books
+|-- compile.sh
+|-- docs
+|   `-- instructions.md
+|-- huffcs
+|-- huffds
+|-- Makefile
+|-- README.md
+|-- src
+|   |-- bits-io.c
+|   |-- bits-io.h
+|   |-- decoder.c
+|   |-- decoder.h
+|   |-- encoder.c
+|   |-- encoder.h
+|   |-- huffc.c
+|   |-- huffd.c
+|   |-- huffman.c
+|   |-- huffman.h
+|   |-- hzip.h
+|   |-- pqueue.c
+|   |-- pqueue.h
+|   |-- table.c
+|   |-- tableg.c
+|   |-- table.h
+|   |-- tree.c
+|   |-- treeg.c
+|   `-- tree.h
+|-- tablegs
+|-- test
+|   `-- all_tests.c
+|-- test.sh
+`-- treegs
+```
 
-We provide you with [starter code]() for this assignment.  Your first
+We provide you with [starter code] for this assignment.  Your first
 task is to **read** through each of the provided source files in
 detail, so that you understand the structure of the code.  This is
 particularly important for this assignment because of the number of
@@ -114,7 +153,7 @@ themselves quite simple, but they depend on a number of "modules" for
 their implementation.  The following is a description of each of these
 modules and their corresponding source files.
 
-## BitsIO Module
+### BitsIO Module
 
 The BitsIO module consists of the following source files:
 
@@ -185,7 +224,7 @@ true byte we read that is all ones.  So make sure to use an ``int``
 for the result of ``fgetc``.
 
 
-## Tree Module
+### Tree Module
 
 The Tree module consists of the following source files:
 
@@ -224,7 +263,7 @@ anything in this file.  However, it is important that you review the
 implementation and read the comments in the code to understand how it
 works.
 
-## Priority Queue Module
+### Priority Queue Module
 
 The Priority Queue module consists of the following source files:
 
@@ -262,7 +301,7 @@ You will complete the implementation of the `pqueue_enqueue` and
 a `TODO` and additional instructions on how to complete the
 implementation.
 
-## Table Module
+### Table Module
 
 The Table module consists of the following source files:
 
@@ -290,7 +329,7 @@ This module also provides a `table_print` function that can be used
 during testing and debugging to ensure that your implementation is
 working properly.  You do not need to make any changes to this module.
 
-## Huffman Module
+### Huffman Module
 
 The Huffman module consists of the following source files:
 
@@ -310,7 +349,7 @@ the Huffman tree.  The details of each of these phases are elaborate
 in `huffman.c`.  You must implement each of the phases in order to
 successfully construct a Huffman tree.
 
-## Encoder and Decoder Module
+### Encoder and Decoder Module
 
 The Encoder and Decoder modules consists of the following source
 files:
@@ -329,52 +368,13 @@ both of these modules are simple.  For encoding, you create a new
 Decoder works in a similar fashion.  You do not need to modify these
 modules.
 
-## The huffc and huffd Programs
+### The huffc and huffd Programs
 
 The `huffc` and `huffd` programs are built from the `huffc.c` and
 `huffd.c` source files respectively.  You should read the code
 contained in these files - it is self-explanatory.
 
-# Compiling the Project
-
-To compile the project you need to use the following command:
-
-```bash
-$ make
-```
-
-This will produce several *object files* and four *executable files*.
-The four executable files are:
-
-* `huffc`
-* `huffd`
-* `treeg`
-* `tableg`
-
-The `huffc` and `huffd` executables perform Huffman compression and
-decompression respectively.  The `treeg` program will read in an ASCII
-text file and print a text representation of the Huffman tree.  You
-can use this as part of your testing and debugging to see if you have
-done this properly.  You can use our provided solution executable
-`treegs` to see what our solution prints out.  To see if your output
-is the same as ours you can redirect the output of both programs to
-files and compare them using the `diff` command.  (*Note:* We are
-*not* talking about comparing the *programs* - your versions will
-almost certainly be different from ours because your source code is
-different.  It is the *output* of the programs that you should
-compare.)
-
-Likewise, the `tableg` executable will print out the table created
-from the Huffman tree.  We have provided our solution executable
-`tablegs` so that you can compare the output against our solution.
-
-You can remove all the generated binary files using make:
-
-```bash
-$ make clean
-```
-
-# Part 2: Compiling and Testing the Code
+## Part 2: Compiling and Testing the Code
 
 To compile your project code you must run the following script from
 the terminal inside the project's root directory (either using the
@@ -387,7 +387,29 @@ $ ./compile
 
 You will notice that after you run this script it will create a obj
 directory as well as a `huffman_submit.zip` file. The later is the zip
-archive file you should submit to Gradescope.
+archive file you should submit to Gradescope. In addition, this will
+produce 4 executable files:
+
+* `huffc`
+* `huffd`
+* `treeg`
+* `tableg`
+
+The `huffc` and `huffd` executables perform Huffman compression and
+decompression respectively. The `treeg` program will read in an ASCII
+text file and print a text representation of the Huffman tree. You can
+use this as part of your testing and debugging to see if you have done
+this properly. You can use our provided solution executable `treegs`
+to see what our solution prints out.  To see if your output is the
+same as ours you can redirect the output of both programs to files and
+compare them using the `diff` command. (Note: We are not talking about
+comparing the programs - your versions will almost certainly be
+different from ours because your source code is different. It is the
+output of the programs that you should compare.)
+
+Likewise, the `tableg` executable will print out the table created
+from the Huffman tree.  We have provided our solution executable
+`tablegs` so that you can compare the output against our solution.
 
 To run the provided tests you can run the following from the terminal:
 
@@ -396,9 +418,44 @@ $ ./test.sh
 ```
 
 This will compile your project and run the tests (take a peek in this
-file to see how this is done).
+file to see how this is done). You will see this output the first time
+you run this script:
 
-# Part 3: Complete Priority Queue
+```
+[==========] Running 4 tests from 1 test case.
+[----------] Global test environment set-up.
+[----------] 4 tests from ProjectTests
+[ RUN      ] ProjectTests.test_bits_io_open
+[       OK ] ProjectTests.test_bits_io_open (0 ms)
+[ RUN      ] ProjectTests.test_bits_io_close
+[       OK ] ProjectTests.test_bits_io_close (0 ms)
+[ RUN      ] ProjectTests.test_bits_io_read_bit
+[       OK ] ProjectTests.test_bits_io_read_bit (6 ms)
+[ RUN      ] ProjectTests.test_bits_io_write_bit
+test/all_tests.c:97: Failure
+      Expected: bit
+      Which is: '\xFF' (255)
+To be equal to: 1
+bits_io_read_bit() returned wrong bit.
+[  FAILED  ] ProjectTests.test_bits_io_write_bit (1 ms)
+[----------] 4 tests from ProjectTests (7 ms total)
+
+[----------] Global test environment tear-down
+[==========] 4 tests from 1 test case ran. (8 ms total)
+[  PASSED  ] 3 tests.
+[  FAILED  ] 1 test, listed below:
+[  FAILED  ] ProjectTests.test_bits_io_write_bit
+
+ 1 FAILED TEST
+```
+
+As usual, you are not provided all the tests that will cover what is
+necessary to truly test your code. We encourage you to look at the
+tests that we provide in the `test/all_tests.c` file. You should think
+hard about how to test your code and implement some tests to ensure
+yourself that you are on the right direction.
+
+## Part 3: Complete Priority Queue
 
 Your first task is to implement the functions:
 
@@ -406,11 +463,11 @@ Your first task is to implement the functions:
 * `pqueue_dequeue`
 
 in the `pqueue.c` file.  The description of what you need to do is
-outlined in the functions themselves.  You should run the tests to
-make sure that your priority queue implementation is working properly
-before you move on to the next part.
+outlined in the functions themselves. You should write some additional
+tests in `test/all_tests.c` to test your work to see if you are
+implementing this part of the project correctly. 
 
-# Part 4: Complete Huffman
+## Part 4: Complete Huffman
 
 Your second task is to implement the functions:
 
@@ -419,36 +476,36 @@ Your second task is to implement the functions:
 * `build_tree`
 
 in the `huffman.c` file.  The description of what you need to do is
-outlined in the functions themselves.  You should run the tests to
-make sure that your Huffman coding implementation is working properly
-before you move on to the next part.  In addition, you can use the
-`treeg` and `tableg` executables to see what the output is and compare
-against our solution executables.  If you are getting the exact output
-as our implementation you are in great shape.
+outlined in the functions themselves. You should write some additional
+tests in `test/all_tests.c` to test your work to see if you are
+implementing this part of the project correctly. In addition, you can
+use the `treeg` and `tableg` executables to see what the output is and
+compare against our solution executables. If you are getting the
+exact output as our implementation you are in great shape.
 
-# Part 5: Complete BitsIO
+## Part 5: Complete BitsIO
 
 Your third task is to implement the function:
 
 * `bits_io_read_bit`
 
 in the `bits-io.c` file.  The description of what you need to do is
-outlined in the function itself.  You should run the tests to make
-sure that your implementation is working properly before you move on
-to the next part.
+outlined in the function itself. You should write some additional
+tests in `test/all_tests.c` to test your work to see if you are
+implementing this part of the project correctly. 
 
-# Part 6: Compression and Decompression Running and Testing
+## Part 6: Compression and Decompression Running and Testing
 
-Once you reach this part of the assignment and the public tests are
-passing you are in a good position to start running the actual `huffc`
-and `huffd` executables.  We have provided the solution binaries as
-`huffcs` and `huffds` that you can use to see if your implementation
-is working properly.  For example, you can run our `huffcs` to
-generate a compressed file and then use your `huffd` to decompress.
-Likewise, use your `huffc` to generate a compressed file and then use
-our `huffds` to decompress it.  You should also compare the size of
-the compressed files generated by our solution and yours to see if
-they match.  You can do this using the following command:
+Once you reach this part of the assignment and the provided tests and
+your own tests are passing you are in a good position to start running
+the actual `huffc` and `huffd` executables.  We have provided the
+solution binaries as `huffcs` and `huffds` that you can use to see if
+your implementation is working properly.  For example, you can run our
+`huffcs` to generate a compressed file and then use your `huffd` to
+decompress.  Likewise, use your `huffc` to generate a compressed file
+and then use our `huffds` to decompress it.  You should also compare
+the size of the compressed files generated by our solution and yours
+to see if they match.  You can do this using the following command:
 
 ```bash
 $ ./huffc books/holmes.txt holmes.he
@@ -469,7 +526,7 @@ $ diff holmes.txt books/holmes.txt
 You can also use the `cmp` program to compare binary files, byte for
 byte.
 
-## Debugging Hints
+### Debugging Hints
 
 C programs involving pointers can be tricky to debug.  You should use
 the `valgrind` tool to help identify problems in your code and any
@@ -493,28 +550,26 @@ to go about debugging your C code:
    the usefulness of this simple method of debugging!
 1. Use `valgrind` to narrow the scope of where your problem is (which
    function), then use the `printf` method.
-1. Use the VSCode debugger to step through your code.
 1. Use the vscode debugger if you are really stuck and need to step
    through your program one line at a time.
 
 We will check your programs to make sure that you do not have any
 memory leaks.
 
-# Submission Instructions
+## Submission Instructions
 
-Once you have past the tests, and have otherwise convinced yourself
-that your implementation meets the requirements you should upload the
-generated `huffman_submit.zip` file to Gradescope. This will run the
-private tests on your implementation and report to you if you have
-passed all the tests. If you have passed all the tests you have
-mastered this project. If you fail any tests you should use the
+Once you have past your tests and ours, and have otherwise convinced
+yourself that your implementation meets the requirements you should
+upload the generated `huffman_submit.zip` file to Gradescope. This
+will run the private tests on your implementation and report to you if
+you have passed all the tests. If you have passed all the tests you
+have mastered this project. If you fail any tests you should use the
 provided feedback from the failed tests to debug and improve your
 implementation until you pass all the tests. You can re-submit your
 project as many times as you wish to Gradescope before the due date of
 the assignment.
 
 [huffman]: http://en.wikipedia.org/wiki/Huffman_coding
-[huffman-slides]: {{ site.baseurl }}/hw/huffman/huffman-slides.pdf
 [priority queue]: http://en.wikipedia.org/wiki/Priority_queue
 [heap]: http://en.wikipedia.org/wiki/Heap_(data_structure)
 

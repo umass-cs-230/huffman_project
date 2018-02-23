@@ -1,7 +1,6 @@
-# COMPSCI 230
-# Huffman Project
+# COMPSCI 230 Computer Systems Principles
+# Huffman Coding
 
-## Documentation
+* [Documentation](docs/instructions.md)
 
-Please read the complete documentation [here](docs/instructions.md).
 
